@@ -13,8 +13,21 @@ services:
     networks:
       - crs-streams_be
 
+  redis:
+    container_name: redis
+    image: redis:7
+    restart: always
+    ports:
+      - 6379:6379
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    networks:
+      - crs-streams_be
+
 volumes:
   db_data:
+  redis_data:
 
 networks:
   crs-streams_be:
